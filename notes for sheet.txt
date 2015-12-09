@@ -1,4 +1,7 @@
+// http://avodonosov.blogspot.com/2015/08/javascript-lexicalenvironment-vs.html
+
 Define:
 
 VariableEnvironment
 LexicalEnvironment
+EnvironmentRecord
