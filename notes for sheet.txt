@@ -1,5 +1,6 @@
 // http://avodonosov.blogspot.com/2015/08/javascript-lexicalenvironment-vs.html
-
+// https://dzone.com/articles/javascript-execution-context
+// http://webcache.googleusercontent.com/search?q=cache:eQvN-rc677wJ:dmitrysoshnikov.com/ecmascript/es5-chapter-3-2-lexical-environments-ecmascript-implementation/+&cd=2&hl=en&ct=clnk&gl=us
 Define:
 
 VariableEnvironment

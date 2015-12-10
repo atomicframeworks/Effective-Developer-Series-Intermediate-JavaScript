@@ -193,7 +193,6 @@ alert(foo());
                         </div>
                     </section>
                     
-                    
                     <section>
                         <h4>TODO - Create image that represents different execution contexts</h4>
                     </section>
@@ -213,8 +212,7 @@ alert(foo());
                                 </li>
                             </ol>
                         </div>
-                    </section>
-                    
+                    </section>   
                 </section>
               
                  <!-- VariableEnvironment & LexicalEnvironment -->
@@ -228,7 +226,7 @@ alert(foo());
                     </section>
                     <section>
                         <div>
-                            <div>The Lexical Environment and Environment Record types are used to explain the behaviour of name resolution in nested functions and blocks.</div>
+                            <div>"The Lexical Environment and Environment Record types are used to explain the behaviour of name resolution in nested functions and blocks."</div>
                             <br>
                             <small class="caption"><small>
                                 Ref: <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-lexical-environment-and-environment-record-specification-types" target="_blank">ECMAScript Language Specification 6.0 - Lexical Environment and Environment Record Specification Types</a>
@@ -246,9 +244,17 @@ alert(foo());
                     </section>
                     
                     <section>
-                        <h4>LexicalEnvironment</h4>
+                        <h4>Contains 2 things</h4>
+                        <ol>
+                            <li>EnvironmentRecord</li>
+                            <li>Reference to the outer environment</li>
+                        </ol>
+                    </section>
+                    
+                    <section>
+                        <h4>EnvironmentRecord</h4>
                         <div>
-                           "Identifies the Lexical Environment used to resolve identifier references made by code within this execution context."
+                           "An Environment Record records the identifier bindings that are created within the scope of its associated Lexical Environment. It is referred to as the Lexical Environment’s EnvironmentRecord"
                         </div>
                     </section>
                     
@@ -260,9 +266,20 @@ alert(foo());
                     </section>
                     
                     <section>
-                        <h4>EnvironmentRecord</h4>
+                        <h4>Example</h4>
+                         <pre class="hljs javascript" data-trim contenteditable>
+function someFunc(a) {
+  var b = 20;
+}
+
+someFunc(10);
+</pre>
+                    </section>
+                    
+                    <section>
+                        <h4>LexicalEnvironment</h4>
                         <div>
-                           "An Environment Record records the identifier bindings that are created within the scope of its associated Lexical Environment. It is referred to as the Lexical Environment’s EnvironmentRecord"
+                           "Identifies the Lexical Environment used to resolve identifier references made by code within this execution context."
                         </div>
                     </section>
                     
@@ -270,8 +287,55 @@ alert(foo());
                         <h4>Note</h4>
                         <div>
                            "The LexicalEnvironment and VariableEnvironment components of an execution context are always Lexical Environments. When an execution context is created its LexicalEnvironment and VariableEnvironment components initially have the same value."
+                            
+                            <aside class="notes">
+                                "Both VariableEnvironment and LexicalEnvironment by their nature are lexical environments (regardless possible confusion in their naming), i.e. both statically (lexically) captures the outer bindings for inner functions created in the context."
+                            </aside>
                         </div>
                     </section>    
+                </section>
+                
+                
+                <section>
+                    <section>
+                        <h4>Back to Execution Contexts!</h4>
+                        <div>
+                          <img src="/img/phone.gif"/> <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h4>Life cycle of Execution Context</h4>
+                        <div>
+                            <ol>
+                                <li>Creation phase</li>
+                                <li>Execution phase</li>
+                            </ol>
+                        </div>
+                    </section>
+                    <section>
+                        <h4>Creation Phase</h4>
+                        <div>
+                            <ol>
+                                <li>Variable Object (VO) is created</li>
+                                <li>Arguments object is created</li>
+                                <li>
+                                    Interpreter creates properties on VO for function declarations
+                                    <ul>
+                                        <li>If there are multiple definitions for the same function the interpreter will <i>override</i> it</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Interpreter creates properties on VO for variable declarations
+                                    <ul>
+                                        <li>If the property already exists on the VO the interpreter will <i>skip</i> it</li>
+                                        <li>Even though the property is <i>defined</i> on the VO it is unassgined until execution</li>
+                                    </ul>
+                                </li>
+                                <li>Scope chain is created</li>
+                            </ol>                    
+                        </div>
+                    </section>
+                
                 </section>
                 
                 <!-- Identifier Resolution & Scope Chain -->
