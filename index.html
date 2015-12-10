@@ -266,13 +266,57 @@ alert(foo());
                     </section>
                     
                     <section>
-                        <h4>Example</h4>
+                        <h4>Global Environment Example</h4>
                          <pre class="hljs javascript" data-trim contenteditable>
-function someFunc(a) {
-  var b = 20;
+// Actual code
+var thing = true;
+
+function double(aNum) {
+    var aNumberDoubled = aNum * 2;
 }
 
-someFunc(10);
+double(4501);
+</pre>
+<pre class="hljs javascript" data-trim contenteditable>
+// Representation of environment of the global context
+globalEnvironment = {
+    environmentRecord: {
+ 
+        // built-ins, etc.
+        Array: function,
+
+        // our bindings:
+        thing: true
+        double: (pointer to double function)
+
+    },
+    outer: null
+};
+</pre>
+                    </section>
+                    <section>
+                        <h4>Global Environment Example</h4>
+                         <pre class="hljs javascript" data-trim contenteditable>
+var thing = true;
+
+function double(aNum) {
+    var aNumberDoubled = aNum * 2;
+}
+
+someFunc(4501);
+</pre>
+<pre class="hljs javascript" data-trim contenteditable>
+// environment of the "double" function
+doubleEnvironment = {
+    environmentRecord: {
+        arguments : {
+            0: 4501,
+            length : 1
+        },
+        aNumberDoubled: 9002
+    },
+    outer: globalEnvironment
+};
 </pre>
                     </section>
                     
