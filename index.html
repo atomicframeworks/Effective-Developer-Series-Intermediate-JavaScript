@@ -404,42 +404,69 @@ doubleEnvironment = {
                         </div>
                     </section>
                 </section>
-                
-                <!-- Object Instantiation -->
+
+
+
+                <!-- Start 'this' Keyword -->
+                <!--todo: all text are notes and must be revisited for formatting nice display-->
                 <section>
                     <section>
-                        <h4>Object Instantiation</h4>
-                        <p>
-                          Title Slide!!<br>
-                          <img src="/img/phone.gif"/> <br>
-                          <small>Flavor text yo</small>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Object Instantiation - more info</h4>
-                        <p>
-                            Go in to detail on some stuff -- give examples
-                        </p>
-                    </section>
-                </section>
-                
-                <!-- Object Instantiation -->
-                <section>
-                    <section>
-                        <h4>'this' keyword</h4>
-                        <p>
-                          Title Slide!!<br>
-                          <img src="/img/phone.gif"/> <br>
-                          <small>Flavor text yo</small>
+                        <h4>'this' Keyword</h4>
+
+                        <p>The crazy adventures of 'this' in your codebase<br>
+                            <img style="height: 50%; width: 50%; " src="img/tug-of-war.jpg"/> <br>
+                            <small>this, that and the other thing</small>
                         </p>
                     </section>
                     <section>
                         <h4>'this' keyword - more info</h4>
+
                         <p>
-                            Go in to detail on some stuff -- give examples
+                            When the 'this' keyword is sitting inside of a method (A method is simply a function within an object), 'this' no longer refers to the <strong>global</strong> object. 'this' now refers to the object in
+                            which the method resides.
+                            An awesome benefit is that one is able to actually access other objects on the instantiated object that 'this' now is pointing to. So, if the object has other properties, like 'name' or 'id',
+                            etc. you may call this.id or this.name. (note: If you ask for the property of 'name', JS assumes you mean 'this.name' providing the word 'this' for free..  <b>As long as the variable does not exist in the current scope</b></span>
                         </p>
                     </section>
-                </section>              
+                    <section>
+                        <p>Note!!</p>
+
+                        <p> Be careful. Just because 'this' refers to the object it was called from in a method, there are still times where 'this' used inside of that object's code refers to the <b>global</b> 'this'!!!!!! (happens when you create a new function inside of the object that is not a method - ie, you assign the function to a variable inside the object)</p>
+
+                        <small>Solution: retain sanity by simply instantiating an object within each object named 'self' (some people prefer the keyword label of 'that'). Then, immediately assign that variable to the keyword 'this'.  JS assigns objects by reference, and now you are free to use self and know <b>for certain</b> that you are still using the same object that 'this' referred to anywhere inside of that object's code. Get in the habit of this practice, as you will avoid some painful bugs due to the fact you were uninteentionally referring to the global 'this', rather than  the object's 'this'.</small>
+                        <aside class="notes">For an example or more info, udemy course, lecture 37 @17:00</aside>
+                        </p>
+                    </section>
+
+                    <section>
+                        <pre class="hljs javascript" data-trim="false" contenteditable="true">
+function giveVarAValue(value) {
+    console.log('-----entering function giveVarAValue-----');
+    var a;
+    console.log('this = ', this);
+    console.log('a = ', a);
+
+                            <span class="fragment">
+    a = value;
+    console.log('this.a =', this.a);
+    console.log('a =', a);
+    console.log('-----leaving function giveVarAValue-----');
+    return a;
+};
+                            </span>
+                        <span class="fragment">
+a = giveVarAValue(44); </span>
+                            <span class="fragment">
+console.log('after calling giveVarAValue(44):', a); </span>
+                            <span class="fragment">
+console.log('after calling giveVarAValue(44):', this.a); </span>
+                            <span class="fragment">
+console.log(this.a === a);
+                            </span>
+                        </span>
+                    </pre>
+                    </section>
+                </section>
 			</div>
 		</div>
 
