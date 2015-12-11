@@ -224,19 +224,14 @@ alert(foo());
                         </div>
                         Oh my!
                     </section>
-                    <section>
-                        <div>
-                            <div>"The Lexical Environment and Environment Record types are used to explain the behaviour of name resolution in nested functions and blocks."</div>
-                            <br>
-                            <small class="caption"><small>
-                                Ref: <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-lexical-environment-and-environment-record-specification-types" target="_blank">ECMAScript Language Specification 6.0 - Lexical Environment and Environment Record Specification Types</a>
-                            </small></small>
-                        </div>
-                    </section>
+                    
                     <section>
                         <h4>Lexical Environment</h4>
                         <div>
                            "A Lexical Environment is a specification type used to define the association of Identifiers to specific variables and functions based upon the lexical nesting structure of ECMAScript code. A Lexical Environment consists of an Environment Record and a possibly null reference to an outer Lexical Environment. Usually a Lexical Environment is associated with some specific syntactic structure of ECMAScript code such as a <i>FunctionDeclaration, a BlockStatement,</i> or a <i>Catch</i> clause of a <i>TryStatement</i> and a new Lexical Environment is created each time such code is evaluated."
+                            
+                            <aside class="notes">Keep in mind this is a definition -- abstract</aside>
+                            
                             <small class="caption"><small>
                                 Ref: <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-lexical-environments" target="_blank">ECMAScript Language Specification 6.0 - Lexical Environments</a>
                             </small></small>
@@ -259,43 +254,16 @@ alert(foo());
                     </section>
                     
                     <section>
-                        <h4>VariableEnvironment</h4>
                         <div>
-                            "Identifies the Lexical Environment whose EnvironmentRecord holds bindings created by VariableStatements within this execution context."
+                            <div>"The Lexical Environment and Environment Record types are used to explain the behaviour of name resolution in nested functions and blocks."</div>
+                            <br>
+                            <small class="caption"><small>
+                                Ref: <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-lexical-environment-and-environment-record-specification-types" target="_blank">ECMAScript Language Specification 6.0 - Lexical Environment and Environment Record Specification Types</a>
+                            </small></small>
                         </div>
                     </section>
-                    
+                   
                     <section>
-                        <h4>Global Environment Example</h4>
-                         <pre class="hljs javascript" data-trim contenteditable>
-// Actual code
-var thing = true;
-
-function double(aNum) {
-    var aNumberDoubled = aNum * 2;
-}
-
-double(4501);
-</pre>
-<pre class="hljs javascript" data-trim contenteditable>
-// Representation of environment of the global context
-globalEnvironment = {
-    environmentRecord: {
- 
-        // built-ins, etc.
-        Array: function,
-
-        // our bindings:
-        thing: true
-        double: (pointer to double function)
-
-    },
-    outer: null
-};
-</pre>
-                    </section>
-                    <section>
-                        <h4>Global Environment Example</h4>
                          <pre class="hljs javascript" data-trim contenteditable>
 var thing = true;
 
@@ -305,19 +273,56 @@ function double(aNum) {
 
 someFunc(4501);
 </pre>
+                        <div>Global Context - Environment Record Representation</div>
+
 <pre class="hljs javascript" data-trim contenteditable>
-// environment of the "double" function
+globalEnvironment = {
+    environmentRecord: {
+ 
+        // Built-ins, etc.
+        Array: function,
+
+        // Our bindings
+        thing: true
+        double: (pointer to double function)
+    },
+    outer: null
+};
+</pre>
+                    </section>
+                    <section>
+                         <pre class="hljs javascript" data-trim contenteditable>
+var thing = true;
+
+function double(aNum) {
+    var aNumberDoubled = aNum * 2;
+}
+
+double(4501);
+</pre>
+                        <div>Double Context - Environment Record Representation</div>
+<pre class="hljs javascript" data-trim contenteditable>
 doubleEnvironment = {
     environmentRecord: {
         arguments : {
             0: 4501,
-            length : 1
+            length : 1,
+            callee: (pointer to double function)
         },
+        aNum: 4501,
         aNumberDoubled: 9002
     },
     outer: globalEnvironment
 };
 </pre>
+                    </section>
+                    
+                     
+                    <section>
+                        <h4>VariableEnvironment</h4>
+                        <div>
+                            "Identifies the Lexical Environment whose EnvironmentRecord holds bindings created by VariableStatements within this execution context."
+                        </div>
                     </section>
                     
                     <section>
