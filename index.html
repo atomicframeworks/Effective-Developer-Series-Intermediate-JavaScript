@@ -410,41 +410,65 @@ doubleEnvironment = {
                 <!-- Start 'this' Keyword -->
                 <section>
                     <section>
-                        <h4>'this' Keyword</h4>
-
-                        <p>Using the Keyword of 'this' in Javascript<br>
+                        <p class="hljs-header">Using the Keyword of 'this' in Javascript<br>
                             <img style="height: 50%; width: 50%; " src="img/tug-of-war.jpg"/> <br>
                             <small>'this', that and the other thing</small>
                         </p>
                     </section>
+
                     <section>
-                        <h4>Let's review two important key words:</h4>
-                        <ul>
-                            <li>Statements</li><br>
-                            <li>Expressions</li><br>
-                            <li>
-                                Statements
+                        <h5>Let's review two important key words:</h5>
+                        <h5> Statement Vs Expression </h5>
+                            <div class="current-fragment">
                                 <ul>
-                                    <li>blab blbha todo: </li> <!--todo:-->
+                                    <li><h6 class="fragment">Statements</h6></li>
+                                    <div class="fragmented">
+                                        <ul>
+                                            <li class="fragment">Statements do not generate values, nor do they assign values to an object. Example: </li>
+                                        <pre class="fragment hljs javascript" data-trim="false" contenteditable="false">
+                                          <li class="fragment"> if (x === 3) //x === 3 is a statement</li>
+                                          <li class="fragment">//but, the returned result of the statement is an expression.</li>
+                                          <li class="fragment">//(true/false)</li>
+                                        </pre>
+                                        </ul>
+                                    </div>
                                 </ul>
-                            </li>
-                            <li>
-                                Expressions
-                                <ul>
-                                    <li>blab blbha todo: </li> <!--todo:-->
-                                </ul>
-                            </li>
-                        </ul>
-                        </section>
+                            </div>
+                    </section>
+                    <section>
+                        <div class="current-fragment">
+                            <ul>
+                                <li><h6 class="fragment">Expressions</h6></li>
+                                <div class="fragmented">
+                                    <ul>
+                                        <li class="fragment">Expressions generate/return values but do not require assignment</li>
+                                        <pre class="fragment hljs javascript" data-trim="false" contenteditable="false">
+                                        <ul>
+                                            <li class="fragment">Examples:</li>
+                                            <li class="fragment">var x = 3; // a value is returned</li>
+                                            <li class="fragment">1 + 2 //a value is returned</li>
+                                        </ul>
+                            <aside class="notes">
+                                Remember that all objects
+                            </aside>
+                                        </pre>
+                                    </ul>
+                                </div>
+                            </ul>
+                        </div>
+                        <br/>
+                    </section>
+
                     <section>
                         <p>Aside: functions are objects, too (as well as function statements and function expressions)</p>
                         <img style="height: 50%; width: 50%; " src="img/placeholder%20for%20functions.png"/> <br>
                     </section>
                     <section>
                         <p>terminology: method vs function</p>
-                        <p>Note!!</p>
+                        <p>Function</p>
+                        <p>Method</p>
 
-                        <p> here is what 'this' means in normal usage</p>
+                        <p> In normal usage. this is prety easy to understand.</p>
                     </section>
                     <section>
                         <p>Watch out for tricky behavior!</p>
