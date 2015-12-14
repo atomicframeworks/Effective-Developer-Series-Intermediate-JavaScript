@@ -57,7 +57,7 @@
                     <section>
                         <h4>Executable Code</h4>
                         <p>
-                          <img src="/img/phone.gif"/> <br>
+                          <img src="/img/boxcat.jpg"/> <br>
                         </p>
                     </section>
                     <section>
@@ -164,12 +164,11 @@ alert(foo());
                     <section>
                         <h4>Execution Context</h4>
                         <div>
-                          <img src="/img/phone.gif"/> <br>
-                          <small>Not Scope</small>
+                          <small>Not scope chain</small>
                         </div>
                     </section>
                     <section>
-                        <h4>So what is it?</h4>
+                        <h4>So what is it? - Spec says...</h4>
                         <div>
                             <blockquote class="monospaced">
                                 &ldquo;An execution context is a specification device that is used to <span class="highlight">track the runtime evaluation of code</span> by an ECMAScript implementation. <span class="fragment">At any point in time, there is at most <span class="highlight">one execution context that is actually executing code</span>.</span> <span class="fragment">This is known as the <span class="highlight">running execution context</span>.</span>&rdquo;
@@ -181,7 +180,18 @@ alert(foo());
                         </div>
                     </section>
                     <section>
-                        <h4>So what is it?</h4>
+                        <h4>Okay...</h4>
+                        <div>
+                        It's an abstract concept used by the specification to help define and differentiate executable code. <br> <br>
+                        Every time control is transferred to ECMAScript executable code, control is entering an execution context.
+                            
+                        <aside class="notes">So the key to keep in mind is that every time we transfer executable code context we are entering a new execution context -- take a second to flip back to point out the executable code defintions </aside>
+
+                            
+                        </div>
+                    </section>
+                    <section>
+                        <h4>So what is it? - Spec says...</h4>
                         <div>
                             <blockquote class="monospaced">
                                 &ldquo;A <span class="highlight">stack</span> is used to track execution contexts. <span class="fragment">The <span class="highlight">running execution context is always the top</span> element of this stack.</span> <span class="fragment">A <span class="highlight">new execution context is created whenever control is transferred</span> from the executable code associated with the currently running execution context to executable code that is not associated with that execution context.</span> <span class="fragment">The newly created execution context is <span class="highlight">pushed onto the stack and becomes the running execution context.</span></span>&rdquo;
@@ -194,7 +204,31 @@ alert(foo());
                     </section>
                     
                     <section>
-                        <h4>TODO - Create image that represents different execution contexts</h4>
+                        <h4>Execution Context - Example</h4>
+                        <img src="/img/execution-context/1-1.png"/>
+                        <img src="/img/execution-context/1.png"/> <br>
+                          <aside class="notes">Simple example - Explain the global and foo contexts. </aside>
+                    </section>
+                    
+                    <section>
+                        <h4>Execution Context - Example</h4>
+                        <img src="/img/execution-context/2-1.png" width="400px"/>
+                        <img src="/img/execution-context/2.png"/>
+                        <img src="/img/execution-context/2-2.png"/> <br>
+                        
+                         
+                          <aside class="notes">Every time a function returns, the current execution context is exited and popped off the stack accordingly. Once the code is completed and globalContext exeuctes until program end.
+                        </aside>
+                    </section>
+                    
+                    <section>
+                        <h4>Eval - Calling Context</h4>
+                        <img style="width:50%;" src="/img/execution-context/3-1.png"/>
+                        <img style="width:80%;" src="/img/execution-context/3.png"/> <br>
+                        
+                         
+                          <aside class="notes">With eval things get weird -- There is a concept of a calling context.  This is the context from which eval is called. Actions made by eval influence the calling context.
+                        </aside>
                     </section>
                     
                     <section>
@@ -220,22 +254,36 @@ alert(foo());
                     <section>
                         <h4>LexicalEnvironments, VariableEnvironments, and EnvironmentRecords</h4>
                         <div>
-                            <img src="/img/phone.gif"/>
+                            <img src="/img/lionstigersbears.png"/>
                         </div>
-                        Oh my!
                     </section>
                     
                     <section>
                         <h4>Lexical Environment</h4>
                         <div>
-                           "A Lexical Environment is a specification type used to define the association of Identifiers to specific variables and functions based upon the lexical nesting structure of ECMAScript code. A Lexical Environment consists of an Environment Record and a possibly null reference to an outer Lexical Environment. Usually a Lexical Environment is associated with some specific syntactic structure of ECMAScript code such as a <i>FunctionDeclaration, a BlockStatement,</i> or a <i>Catch</i> clause of a <i>TryStatement</i> and a new Lexical Environment is created each time such code is evaluated."
                             
-                            <aside class="notes">Keep in mind this is a definition -- abstract</aside>
-                            
+                            <blockquote class="monospaced">
+                                &ldquo;A Lexical Environment is a specification type used to define the association of Identifiers to specific variables and functions based upon the <span class="highlight">lexical nesting structure</span> of ECMAScript code.&rdquo;
+                            </blockquote>
                             <small class="caption"><small>
                                 Ref: <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-lexical-environments" target="_blank">ECMAScript Language Specification 6.0 - Lexical Environments</a>
                             </small></small>
                         </div>
+                    </section>
+                    
+                    <section>
+                        <h4>Okay...</h4>
+                        Lexical
+                        <aside class="notes">Lexical analysis refers to the process of converting a sequence of characters to tokens. So in this sense lexical refers to where "lexically" in the source text the environment appears.  This is important because lexical scope means compile time scope. In other words the scoping decisions have already been made. So we should be able to look at our code and see lexically the scope of our variables. </aside>
+
+                        
+                    </section>
+                    
+                    <section>
+                         <blockquote class="monospaced">
+                             &ldquo;A Lexical Environment consists of an <span class="highlight">Environment Record</span> and a possibly null <span class="highlight">reference to an outer Lexical Environment.</span> <span class="fragment">Usually a Lexical Environment is associated with some specific syntactic structure of ECMAScript code such as a <span class="highlight"><i>FunctionDeclaration, a BlockStatement,</i> or a <i>Catch</i> clause</span> of a <i>TryStatement</i> and a new Lexical Environment is created each time such code is evaluated.</span>&rdquo;
+                            </blockquote>
+                        <aside class="notes">If the code is running in the global context the reference to the outer environment will be null. A new lexical environment is created for of the structures</aside>
                     </section>
                     
                     <section>
@@ -244,6 +292,7 @@ alert(foo());
                             <li>EnvironmentRecord</li>
                             <li>Reference to the outer environment</li>
                         </ol>
+                        <aside class="notes">The reference to the outer environment will be null if it is the global context</aside>
                     </section>
                     
                     <section>
@@ -251,11 +300,13 @@ alert(foo());
                         <div>
                            "An Environment Record records the identifier bindings that are created within the scope of its associated Lexical Environment. It is referred to as the Lexical Environment’s EnvironmentRecord"
                         </div>
+                        <aside class="notes">What this means really is that an environment record is the storage for variables for the it's context.</aside>
                     </section>
                     
                     <section>
                         <div>
                             <div>"The Lexical Environment and Environment Record types are used to explain the behaviour of name resolution in nested functions and blocks."</div>
+                            <aside class="notes">So basically these things help us figure our the scope for nested functions and blocks.</aside>
                             <br>
                             <small class="caption"><small>
                                 Ref: <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-lexical-environment-and-environment-record-specification-types" target="_blank">ECMAScript Language Specification 6.0 - Lexical Environment and Environment Record Specification Types</a>
@@ -271,7 +322,7 @@ function double(aNum) {
     var aNumberDoubled = aNum * 2;
 }
 
-someFunc(4501);
+double(4501);
 </pre>
                         <div>Global Context - Environment Record Representation</div>
 
@@ -283,12 +334,13 @@ globalEnvironment = {
         Array: function,
 
         // Our bindings
-        thing: true
+        thing: true,
         double: (pointer to double function)
     },
     outer: null
 };
 </pre>
+                        <aside class="notes">Note there is no reference to an outer environment. We can see the environment record holds bindings of ours and built ins</aside>
                     </section>
                     <section>
                          <pre class="hljs javascript" data-trim contenteditable>
@@ -304,7 +356,7 @@ double(4501);
 <pre class="hljs javascript" data-trim contenteditable>
 doubleEnvironment = {
     environmentRecord: {
-        arguments : {
+        arguments: {
             0: 4501,
             length : 1,
             callee: (pointer to double function)
@@ -315,14 +367,46 @@ doubleEnvironment = {
     outer: globalEnvironment
 };
 </pre>
+                        <aside class="notes">Note reference to outer environment, arguments object</aside>
                     </section>
                     
-                     
+                    <section>
+                        <h4>Execution Context Components</h4>
+                        <ul>
+                            <li>VariableEnvironment</li>
+                            <li>LexicalEnvironment</li>
+                        </ul>
+                        <aside class="notes">Two components of an execution context are variable and lexical environments. Both VariableEnvironment and LexicalEnvironment by their nature are lexical environments -- with a space meaning they both statically (lexically) captures the outer bindings for inner functions created in the context. </aside>
+
+                    </section>
+                    
                     <section>
                         <h4>VariableEnvironment</h4>
                         <div>
                             "Identifies the Lexical Environment whose EnvironmentRecord holds bindings created by VariableStatements within this execution context."
+                            <aside class="notes">The Variable environment component is exactly the initial storage of variables and functions of the context. Exactly its environment record is used as the data storage and is filled on entering the context stage. </aside>
                         </div>
+                    </section>
+                    
+                    <section>
+                        <pre class="hljs javascript" data-trim contenteditable>
+function foo(a) {
+  var b = 20;
+}
+ 
+foo(10);
+</pre>
+                        <div>Foo Context - VariableEnvironment Representation</div>
+<pre class="hljs javascript" data-trim contenteditable>
+fooContext.VariableEnvironment = {
+  environmentRecord: {
+    arguments: {0: 10, length: 1, callee: foo},
+    a: 10,
+    b: 20
+  },
+  outer: globalEnvironment
+};
+</pre>
                     </section>
                     
                     <section>
@@ -330,26 +414,52 @@ doubleEnvironment = {
                         <div>
                            "Identifies the Lexical Environment used to resolve identifier references made by code within this execution context."
                         </div>
+                        <aside class="notes">The funny thing is -- Initially the lexicalEnvironment is just a copy of the VariableEnvironment.</aside>
+                    </section>
+                        
+
+                    <section>
+                        <h4>So What's the Diff?</h4>
+                        <div>
+                            The <i>with</i> statement and <i>catch</i> clause replace the context's environment for the time of their execution. This is also the case with <i>function expressions</i>.
+                            
+                            <aside class="notes">For example the catch clause causes a new lexical environment that is a copy of the current and modifies it with the exception argument. This is also true for <i>function expressions</i></aside>
+                            
+                        </div>
                     </section>
                     
                     <section>
-                        <h4>Note</h4>
-                        <div>
-                           "The LexicalEnvironment and VariableEnvironment components of an execution context are always Lexical Environments. When an execution context is created its LexicalEnvironment and VariableEnvironment components initially have the same value."
-                            
-                            <aside class="notes">
-                                "Both VariableEnvironment and LexicalEnvironment by their nature are lexical environments (regardless possible confusion in their naming), i.e. both statically (lexically) captures the outer bindings for inner functions created in the context."
-                            </aside>
-                        </div>
-                    </section>    
+                        <h4>What happens?</h4>
+                        <aside class="notes">New function Declaration means new variableEnvironment becomes scope</aside>
+                        <img src="/img/execution-context/4.png"/>
+                    </section>
+                    
+                    <section>
+                        <h4>What happens?</h4>
+                        <img src="/img/execution-context/5.png"/>
+                        <aside class="notes">Function expression keeps same variableEnvironment and has new lexicalEnvironment</aside>
+                    </section>
+                    
+                     <section>
+                        <h4>What happens?</h4>
+                        <img src="/img/execution-context/6.png"/>
+                        <aside class="notes">Function expression new lexicalEnvironment</aside>
+                    </section>
+                    
+                    <section>
+                        <h4>What happens?</h4>
+                        <img src="/img/execution-context/7.png"/>
+                        <aside class="notes">Function expression new lexicalEnvironment</aside>
+                    </section>
                 </section>
                 
                 
                 <section>
                     <section>
-                        <h4>Back to Execution Contexts!</h4>
+                        <h4>Hoisting</h4>
                         <div>
-                          <img src="/img/phone.gif"/> <br>
+                            <img src="/img/hoist.jpg"/> <br>
+                            <small>More on execution contexts!</small>
                         </div>
                     </section>
                     <section>
@@ -361,48 +471,124 @@ doubleEnvironment = {
                             </ol>
                         </div>
                     </section>
+                    
                     <section>
                         <h4>Creation Phase</h4>
                         <div>
                             <ol>
                                 <li>Variable Object (VO) is created</li>
-                                <li>Arguments object is created</li>
-                                <li>
+                                <li class="fragment">Arguments object is created</li>
+                                <li class="fragment">
                                     Interpreter creates properties on VO for function declarations
-                                    <ul>
+                                    <ul class="fragment">
                                         <li>If there are multiple definitions for the same function the interpreter will <i>override</i> it</li>
                                     </ul>
                                 </li>
-                                <li>
+                                <li class="fragment">
                                     Interpreter creates properties on VO for variable declarations
-                                    <ul>
+                                    <ul class="fragment">
                                         <li>If the property already exists on the VO the interpreter will <i>skip</i> it</li>
                                         <li>Even though the property is <i>defined</i> on the VO it is unassgined until execution</li>
                                     </ul>
                                 </li>
-                                <li>Scope chain is created</li>
-                            </ol>                    
+                                <li class="fragment">Scope chain is created</li>
+                            </ol>
+                            <aside class="notes">
+                            Variable object is abstract concept and therefore, depending on its execution context, is any link in scope-chain including activation/global object. It's kind of like environment record</aside>
                         </div>
                     </section>
+                    
+                    <section>
+                        <h4>Creation Phase</h4>
+                        <pre class="hljs javascript" data-trim contenteditable>
+var a = 1;
+function foo() {
+    var b = 2;
+}
+foo();
+</pre>
+                        <ol>
+                            <li>Function declarations on VO</li>
+                            <li>Properties for variables created on VO as <i>undefined</i></li>
+                        </ol>
+                    </section>
+                    
+                    
+                    <section>
+                        <h4>What happens?</h4>
+                        <pre class="hljs javascript" data-trim contenteditable>
+alert(foo());
+function foo() {
+    return 1;
+}
+var foo = 2;
+</pre>
+                        <aside class="notes">Foo is a function declaration and is assigned at creation phase.  That's why it is available before it looks like it</aside>
+                        
+                    </section>
+                    
+                    <section>
+                        <h4>What happens?</h4>
+                        <pre class="hljs javascript" data-trim contenteditable>
+function foo(){
+    return bar();
+    var bar = function() {
+        return 3;
+    };
+    function bar() {
+        return 8;
+    };
+}
+alert(foo());
+</pre>
+                        <aside class="notes">Foo is a function declaration and is assigned at creation phase.  That's why it is available before it looks like it</aside>
+                        
+                    </section>
+                    
+                    
+                    
                 
                 </section>
                 
                 <!-- Identifier Resolution & Scope Chain -->
                 <section>
                     <section>
-                        <h4>Identifier Resolution & Scope Chain</h4>
+                        <h4>Identifier Resolution</h4>
+                                                  <small>Yes, this is where scope chain comes in!</small> <br>
                         <div>
-                          Title Slide!!<br>
-                          <img src="/img/phone.gif"/> <br>
-                          <small>Flavor text yo</small>
+                          <img src="/img/functions.jpg"/>
                         </div>
                     </section>
                     <section>
-                        <h4>Identifier Resolution & Scope Chain - more info</h4>
+                        <h4>Identifier Resolution</h4>
                         <div>
-                            Go in to detail on some stuff -- give examples
+                            The process of determining the binding of an identifier appearing in the current context by using the LexicalEnvironment component of the running execution context.
+                                                    <aside class="notes">This is basically the process of determining the value of a variable when you try to reference it</aside>
+
                         </div>
                     </section>
+                    <section>
+                        <h4>Scope Chain - Look through the environments at the records</h4>
+                        <img src="/img/execution-context/8.png"/>
+
+                        <aside class="notes">The basic algorithm is look at the current lexical environment's environment record -- if not found then look at outer environment environment record repeat until the item is found or the other reference is null which means there is a reference error because the identifier doesn't exist</aside>
+                    </section>
+                    
+                    <section>
+                        <img src="/img/scope/1.png"/>
+                        <aside class="notes">Here we have global context. You can see we have our 'some' variable defined and no outer environment</aside>
+                    </section>
+                    
+                    <section>
+                        <img src="/img/scope/2.png"/>
+                        <aside class="notes">Here we enter the a function which is a new environment where it defines 'example'</aside>
+                    </section>
+                    
+                    <section>
+                        <img src="/img/scope/3.png"/>
+                        <aside class="notes">Final context here.  Notice how they are nested? 'code' is defined.  We then see a reference to 'some example code'.  Follow the example for them</aside>
+                    </section>
+                    
                 </section>
 
 
