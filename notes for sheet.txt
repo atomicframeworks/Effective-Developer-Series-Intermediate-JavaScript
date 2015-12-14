@@ -8,6 +8,15 @@
 
 
 Execution context:
+
+When our JavaScript program runs it creates storage structures/"systems" for holding variables and their values. "These in memory scope structures are called execution contexts" 
+
+
+
+
+
+
+
 http://stackoverflow.com/questions/9384758/what-is-the-execution-context-in-javascript-exactly
 http://stackoverflow.com/questions/28902895/are-execution-context-and-variable-object-actually-same-thing-in-javascript?lq=1
 http://corporate.tuenti.com/en/dev/blog/functions-and-execution-contexts-in-javascript-2
